@@ -2,7 +2,8 @@
 
 while true; do
     # Display a menu
-    echo "Hello Jesper"
+    clear
+    echo -e "Hello Again, nice to see you.\n"
     echo "Select an option:"
     echo "1. Change Hostname "
     echo "2. Reboot System"
