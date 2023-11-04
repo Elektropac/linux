@@ -52,7 +52,7 @@ while true; do
         9)
             # Exit the script
             echo "Exiting the script."
-            exit 0
+            exit
             ;;
         *)
             echo "Invalid choice. Please select a valid option (1/2/3)."
