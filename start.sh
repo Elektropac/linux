@@ -6,8 +6,16 @@ while true; do
     echo -e "Hello Again, nice to see you.\n"
     echo "Select an option:"
     echo "1. Change Hostname "
-    echo "2. Reboot System"
-    echo "3. Exit"
+    echo "3"
+    echo "4"
+    echo "5"
+    echo "6"
+    echo "7"
+    echo "8"
+    
+    
+    echo -e "\n9. Reboot System"
+    echo "10. Exit"
 
     # Read the user's choice
     read -p "Enter your choice (1/2/3): " choice
