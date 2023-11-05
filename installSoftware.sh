@@ -5,7 +5,7 @@ while true; do
     clear
     echo -e "Install Software.\n"
     echo -e "Select an option:"
-    echo -e "1. . "
+    echo -e "Install Tail Scale. "
     echo -e "2. . "
     echo -e "3. . "
     echo -e "5"
@@ -21,7 +21,12 @@ while true; do
     # Process the user's choice
     case $choicea in
         1)
-            echo "Not ready yet"
+            sudo apt update
+            sudo apt install curl
+            curl -fsSL https://tailscale.com/install.sh | sh
+            sudo tailscale up
+            echo -e "Please save this link for later\n"
+            echo -e "Or press Ctrl and click on the link to add to account "
             ;;
         2)
             echo "Not ready yet"
