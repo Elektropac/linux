@@ -1,61 +1,38 @@
 #!/bin/bash
 
-while true; do
-    # Display a menu
-    clear
-    echo -e "Hello Again, nice to see you.\n"
-    echo "Select an option:"
-    echo "1. Install software. "
-    echo "2. Setup Machine. "
-    echo "3. Linux terminal help. "
-    echo "5"
-    echo "6"
-    echo "7"
-    echo "8"
-    
-    
-    echo -e "\n8. Reboot System"
-    echo -e "9. Exit\n"
+# Tjek om 'dialog' er installeret, og installér det hvis det mangler
+if ! command -v dialog &> /dev/null; then
+    echo "'dialog' er ikke installeret. Installerer 'dialog'..."
+    sudo apt-get install dialog
+fi
 
-    # Read the user's choice
-    read -p "Enter your choice (1/2/3..): " choice
+# Definér scripts og deres beskrivelser
+declare -A scripts
+scripts["script1.sh"]="Beskrivelse af script 1"
+scripts["script2.sh"]="Beskrivelse af script 2"
+scripts["script3.sh"]="Beskrivelse af script 3"
 
-    # Process the user's choice
-    case $choice in
-        1)
-            ./installSoftware.sh
-            # Change hostname
-            #./change-hostname.sh
-            ;;
-        2)
-            ./setupMachine.sh
-            ;;
-        3)
-            echo "No ready yet"
-            ;;
-        4)
-            echo "No ready yet"
-            ;;
-        5)
-            echo "No ready yet"
-            ;;
-        6)
-            echo "No ready yet"
-            ;;
-        7)
-            echo "No ready yet"
-            ;;
-        8)
-            # Reboot system
-            sudo reboot
-            ;;
-        9)
-            # Exit the script
-            echo "Exiting the script."
-            exit
-            ;;
-        *)
-            echo "Invalid choice. Please select a valid option (1/2/3)."
-            ;;
-    esac
+# Opret dialog kommando
+cmd=(dialog --separate-output --checklist "Vælg scripts at køre:" 22 76 16)
+
+# Tilføj scripts til dialog kommando
+options=()
+for script in "${!scripts[@]}"; do
+    options+=("$script" "${scripts[$script]}" off)
 done
+
+# Vis dialogen og gem output
+valgte_scripts=()
+if valgte_scripts=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty); then
+    for script in $valgte_scripts; do
+        echo "Kører $script..."
+        ./$script
+    done
+else
+    echo "Ingen scripts valgt."
+fi
+
+# Ryd op
+clear
+
+echo "Alle valgte scripts er kørt."
