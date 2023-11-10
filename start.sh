@@ -1,4 +1,4 @@
-tester lige igen#!/bin/bash
+#!/bin/bash
 
 # Tjek om 'dialog' er installeret, og installér det hvis det mangler
 if ! command -v dialog &> /dev/null; then
