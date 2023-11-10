@@ -13,7 +13,7 @@ scripts["script2.sh"]="Setup"
 scripts["updatefiles.sh"]="Update menu"
 
 # Opret dialog kommando
-cmd=(dialog --separate-output --checklist "What do you want to do test:" 22 50 36)
+cmd=(dialog --separate-output --checklist "What do you want to do testen test mere:" 22 50 36)
 
 # Define the desired order for the scripts
 desired_order=("script1.sh" "script2.sh" "updatefiles.sh")
