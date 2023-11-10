@@ -15,28 +15,22 @@ scripts["runthis.sh"]="Exit"
 # Opret dialog kommando
 cmd=(dialog --separate-output --checklist "What do you want to do:" 22 50 36)
 
-# Tilføj scripts til dialog kommando
+# Define the desired order for the scripts
+desired_order=("script1.sh" "script2.sh" "runthis.sh")
+
+# Sort the options array according to the desired order
 options=()
-for script in "${!scripts[@]}"; do
-    options+=("$script" "${scripts[$script]}" off)
+for script_name in "${desired_order[@]}"; do
+    script_description="${scripts[$script_name]}"
+    options+=("$script_name" "$script_description" off)
 done
 
 # Vis dialogen og gem output
 valgte_scripts=()
 if valgte_scripts=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty); then
-    ordered_scripts=()
     for script in $valgte_scripts; do
-        ordered_scripts+=($script)
-    done
-
-    # Define the order in which scripts should be run
-    script_order=("script1.sh" "script2.sh" "runthis.sh")
-
-    for script_to_run in "${script_order[@]}"; do
-        if [[ "${ordered_scripts[@]}" =~ "$script_to_run" ]]; then
-            echo "Kører $script_to_run..."
-            ./$script_to_run
-        fi
+        echo "Kører $script..."
+        ./$script
     done
 else
     echo "Ingen scripts valgt."
