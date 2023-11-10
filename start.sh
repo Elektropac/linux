@@ -1,5 +1,5 @@
 #!/bin/bash
-Ok så tester vi lige igen
+Lad mig lige ryde lidt op
 # Tjek om 'dialog' er installeret, og installér det hvis det mangler
 if ! command -v dialog &> /dev/null; then
     echo "'dialog' er ikke installeret. Installerer 'dialog'..."
