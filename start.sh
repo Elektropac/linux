@@ -10,13 +10,13 @@ fi
 declare -A scripts
 scripts["script1.sh"]="Install software"
 scripts["script2.sh"]="Setup"
-scripts["runthis.sh"]="Exit"
+scripts["updatefiles.sh"]="Update menu"
 
 # Opret dialog kommando
 cmd=(dialog --separate-output --checklist "What do you want to do:" 22 50 36)
 
 # Define the desired order for the scripts
-desired_order=("script1.sh" "script2.sh" "runthis.sh")
+desired_order=("script1.sh" "script2.sh" "updatefiles.sh")
 
 # Sort the options array according to the desired order
 options=()
