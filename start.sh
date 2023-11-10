@@ -8,9 +8,9 @@ fi
 
 # Definér scripts og deres beskrivelser
 declare -A scripts
-scripts["script1.sh"]="Beskrivelse af script 1"
-scripts["script2.sh"]="Beskrivelse af script 2"
-scripts["script3.sh"]="Beskrivelse af script 3"
+scripts["script1.sh"]="Install software"
+scripts["script2.sh"]="Setup"
+scripts["exit"]="Exit"
 
 # Opret dialog kommando
 cmd=(dialog --separate-output --checklist "Vælg scripts at køre:" 22 76 16)
