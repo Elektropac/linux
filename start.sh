@@ -1,37 +1,31 @@
 #!/bin/bash
 
-# Tjek om 'dialog' er installeret, og installér det hvis det mangler
-if ! command -v dialog &> /dev/null; then
-    echo "'dialog' er ikke installeret. Installerer 'dialog'..."
-    sudo apt-get install dialog
-fi
-
-# Definér scripts og deres beskrivelser
-declare -A scripts
-scripts["install.sh"]="Install software"
-scripts["setup.sh"]="Setup this machine"
-scripts["updatefiles.sh"]="Update menu"
-scripts["manage-user.sh"]="Add, change and delete user"
-
-# Opret dialog kommando
-cmd=(dialog --radiolist "Choose an action:" 0 0 0)
-
-# Byg radiolisten med scripts og beskrivelser
-options=()
-for script_name in "${!scripts[@]}"; do
-    script_description="${scripts[$script_name]}"
-    options+=("$script_name" "$script_description" off)
-done
-
-# Vis dialogen og gem output
-chosen_script=""
-chosen_script=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-if [ $? -eq 0 ]; then
-    echo "Kører $chosen_script..."
-    ./$chosen_script
-else
-    echo "Ingen handling valgt."
-fi
-
-# Ryd op
+# Viser en liste over almindelige brugere på systemet
 clear
+echo -e "START\n"
+
+# Spørger hvad brugeren ønsker at gøre
+echo "What do you like to do? :"
+echo "1. Install software"
+echo "2. Setup terminal"
+echo "3. Manage user"
+echo "4. Exit"
+read -p "Enter choise (1-4): " ACTION
+
+case $ACTION in
+    1)
+      ./installSoftware.sh
+    ;;
+
+    2)
+    ;;
+
+    3)
+      ./manage-user.sh
+    ;;
+
+    4)
+
+    ;;
+
+    esac
