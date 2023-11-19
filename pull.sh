@@ -15,6 +15,7 @@ sudo chmod 777 pullgit.sh
 
 ./pullgit.sh
 
+cd ~
 #sudo rm -r linux
 #git clone https://github.com/elektropac/linux
 #sudo chmod 777 linux/*
