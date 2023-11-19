@@ -8,9 +8,10 @@ fi
 
 # Definér scripts og deres beskrivelser
 declare -A scripts
-scripts["script1.sh"]="Install software"
-scripts["script2.sh"]="Setup"
+scripts["install.sh"]="Install software"
+scripts["setup.sh"]="Setup this machine"
 scripts["updatefiles.sh"]="Update menu"
+scripts["manage-user.sh"]="Add, change and delete user"
 
 # Opret dialog kommando
 cmd=(dialog --radiolist "Choose an action:" 0 0 0)
