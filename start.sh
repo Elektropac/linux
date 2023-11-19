@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Tjek om 'dialog' er installeret, og installér det hvis det mangler
 if ! command -v dialog &> /dev/null; then
     echo "'dialog' er ikke installeret. Installerer 'dialog'..."
@@ -12,27 +13,23 @@ scripts["script2.sh"]="Setup"
 scripts["updatefiles.sh"]="Update menu"
 
 # Opret dialog kommando
-cmd=(dialog --separate-output --checklist "What do you want to do:" 22 50 36)
+cmd=(dialog --radiolist "Choose an action:" 0 0 0)
 
-# Define the desired order for the scripts
-desired_order=("script1.sh" "script2.sh" "updatefiles.sh")
-
-# Sort the options array according to the desired order
+# Byg radiolisten med scripts og beskrivelser
 options=()
-for script_name in "${desired_order[@]}"; do
+for script_name in "${!scripts[@]}"; do
     script_description="${scripts[$script_name]}"
     options+=("$script_name" "$script_description" off)
 done
 
 # Vis dialogen og gem output
-valgte_scripts=()
-if valgte_scripts=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty); then
-    for script in $valgte_scripts; do
-        echo "Kører $script..."
-        ./$script
-    done
+chosen_script=""
+chosen_script=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+if [ $? -eq 0 ]; then
+    echo "Kører $chosen_script..."
+    ./$chosen_script
 else
-    echo "Ingen scripts valgt."
+    echo "Ingen handling valgt."
 fi
 
 # Ryd op
