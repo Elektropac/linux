@@ -11,6 +11,8 @@ echo "sudo chmod 777 linux/*" >> pullgit.sh
 echo "cd linux" >> pullgit.sh
 echo "./start.sh" >> pullgit.sh
 
+sudo chmod 777 pullgit.sh
+
 ./pullgit.sh
 
 #sudo rm -r linux
